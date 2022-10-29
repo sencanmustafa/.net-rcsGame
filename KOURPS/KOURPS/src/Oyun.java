@@ -1,303 +1,161 @@
+import items.Kagit;
+import items.Makas;
+import items.Nesneler;
+import items.Tas;
+import business.itemManager;
+import java.sql.SQLOutput;
 import java.util.*;
 
-public class Oyun {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-}
-abstract class Silah {
-    // Değişkenler
-    int dayaniklilik;
-    int seviyePuani;
+public class Oyun
+{
 
-    // Fonksiyonlar
-    void nesnePuaniGoster() {
-        System.out.println("Dayanıklılık: " + dayaniklilik);
-        System.out.println("Seviye Puanı: " + seviyePuani);
-    }
-    int etkiHesapla() {
-        return 0;
-    }
-    void durumGuncelle(int etki) {
-        this.dayaniklilik -= etki;
-        // Seviye puanı hesaplama kodları buraya gelecek.
-    }
+    public static void nesneUret(List<Nesneler> list)
+    {
 
-    // Constructorlar
-    public Silah() {
-        this.dayaniklilik = 20;
-        this.seviyePuani = 0;
-    }
-    public Silah(int dayanma, int seviyeP) {
-        this.dayaniklilik = dayanma;
-        this.seviyePuani = seviyeP;
-    }
-}
+        for (int j = 0;j<5;j++)
+        {
+            Random r = new Random();
+            int randomInt = r.nextInt(3);
 
-// Taş ve alt class'ları
+            if (randomInt == 0)
+            {
+                list.add(new Tas());
+            }
+            else if (randomInt == 1)
+            {
+                list.add(new Makas());
+            }
+            else {
+                list.add(new Kagit());
+            }
+        }
+    }
+    public static void main(String[] args)
+    {
 
-class Tas extends Silah {
-    // Değişkenler
-    int katilik;
-    double makasSavunma;
-    double kagitSavunma;
+        while (true)
+        {
+            System.out.println("1 -> Bilgisayar-Bilgisayar");
+            System.out.println("2 -> Kullacini-Bilgisayar");
+            System.out.println("9 -> cikis");
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("bir secim yapiniz");
+            int secim = scanner.nextInt();;
+            if (secim==9)
+            {
+                break;
+            }
+            else if (secim==1)
+            {
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Katılık: " + katilik);
-    }
-    double etkiHesapla(double rakipSavunmasi) {
-        return katilik / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
+                Bilgisayar bilgisayar = new Bilgisayar(1,"bilgisayar");
+                Bilgisayar bilgisayar2 = new Bilgisayar(2,"bilgisayar2");
+                nesneUret(bilgisayar.nesneListesi);
+                nesneUret(bilgisayar2.nesneListesi);
+                while (true)
+                {
+                    System.out.println("2 -> savastir");
+                    System.out.println("3 -> bilgisayar 1 nesneleri gor");
+                    System.out.println("4 -> bilgisayar 2 nesneleri gor");
+                    System.out.println("9 -> ust menu");
+                    Scanner scanner2 = new Scanner(System.in);
+                    System.out.println("bir secim yapiniz");
+                    int secim2 = scanner.nextInt();;
+                    if (secim2 == 9)
+                    {
+                        break;
+                    }
+                    else if (secim2==2)
+                    {
+                        for (int i =0;i<5;i++)
+                        {
+                            Nesneler savasan1 = bilgisayar.nesneListesi.get(i);
+                            Nesneler savasan2 = bilgisayar2.nesneListesi.get(i);
+                            System.out.println(savasan2.getClass());
+                            System.out.println(savasan1.getClass());
+                            double savasan1etki = savasan1.etkiHesapla(itemManager.savas(savasan1,savasan2));
+                            System.out.println("sav1 etki " + savasan1etki);
+                            double savasan2etki = savasan2.etkiHesapla(itemManager.savas(savasan2,savasan1));
+                            System.out.println("sav2 etki " + savasan2etki);
+                            if (Double.isInfinite(savasan1etki) || Double.isInfinite(savasan2etki))
+                            {
+                                System.out.println("berabere");
+                                continue;
+                            }
 
-    // Constructorlar
-    public Tas() {
-        super();
-        this.katilik = 2;
-        this.makasSavunma = 0.8 * this.katilik;
-        this.kagitSavunma = 0.2 * this.katilik;
-    }
-    public Tas(int dayanma, int seviyeP, int kati) {
-        super(dayanma, seviyeP);
-        this.katilik = kati;
-        this.makasSavunma = 0.8 * this.katilik;
-        this.kagitSavunma = 0.2 * this.katilik;
-    }
-}
-class AgirTas extends Tas {
-    // Değişkenler
-    int sicaklik;
+                            savasan1.nesneOzellikleriGoster();
+                            savasan2.nesneOzellikleriGoster();
+                            savasan1.durumGuncelle(savasan2etki);
+                            savasan2.durumGuncelle(savasan1etki);
+                            if (savasan1.dayaniklilik<=0)
+                            {
+                                bilgisayar.nesneListesi.remove(savasan1);
+                                savasan2.seviyePuani += 20;
+                                if (savasan2.seviyePuani >=30)
+                                {
+                                    System.out.println(savasan2.isim + "30 u asti");
+                                }
+                                break;
+                            }
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Sıcaklık: " + sicaklik);
-    }
-    @Override
-    double etkiHesapla(double rakipSavunmasi) {
-        return katilik * sicaklik / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
+                            if (savasan2.dayaniklilik<=0)
+                            {
+                                bilgisayar2.nesneListesi.remove(savasan2);
+                                savasan1.seviyePuani += 20;
+                                if (savasan1.seviyePuani>=30)
+                                {
+                                    System.out.println(savasan1.isim + "30 u asti");
+                                }
+                                break;
+                            }
+                            savasan1.nesneOzellikleriGoster();
+                            savasan2.nesneOzellikleriGoster();
+                        }
+                    }
+                    else if (secim2==3)
+                    {
+                        bilgisayar.nesneleriGoruntule(bilgisayar.nesneListesi);
+                    }
+                    else if (secim2==4)
+                    {
+                        bilgisayar2.nesneleriGoruntule(bilgisayar2.nesneListesi);
+                    }
+                    else
+                    {
+                        System.out.println("hatali secim ust menu");
+                    }
 
-    // Constructorlar
-    public AgirTas() {
-        super();
-        this.sicaklik = 2;
-        this.makasSavunma *= this.sicaklik;
-        this.kagitSavunma *= this.sicaklik;
-    }
-    public AgirTas(int dayanma, int seviyeP, int kati, int sicak) {
-        super(dayanma, seviyeP, kati);
-        this.sicaklik = sicak;
-        this.makasSavunma *= this.sicaklik;
-        this.kagitSavunma *= this.sicaklik;
-    }
-}
+                }
 
-// Kağıt ve alt class'ları
+                /*
 
-class Kagit extends Silah {
-    // Değişkenler
-    int nufuz;
-    double tasSavunma;
-    double makasSavunma;
+                System.out.println("bilgisyar 1 nesneleri");
+                bilgisayar.nesneleriGoruntule(bilgisayar.nesneListesi);
+                System.out.println("bilgisyar 2 nesneleri");
+                bilgisayar2.nesneleriGoruntule(bilgisayar2.nesneListesi);
+                System.out.println("deneme");
+                */
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Nüfuz: " + nufuz);
-    }
-    double etkiHesapla(double rakipSavunmasi) {
-        return nufuz / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
+            }
+        }
 
-    // Constructorlar
-    public Kagit() {
-        super();
-        this.nufuz = 2;
-        this.tasSavunma = 0.8 * nufuz;
-        this.makasSavunma = 0.2 * nufuz;
-    }
-    public Kagit(int dayanma, int seviyeP, int nuf) {
-        super(dayanma, seviyeP);
-        this.nufuz = nuf;
-        this.tasSavunma = 0.8 * nufuz;
-        this.makasSavunma = 0.2 * nufuz;
-    }
-}
-class OzelKagit extends Kagit {
-    // Değişkenler
-    int kalinlik;
+        /*
+        Bilgisayar bilgisayar = new Bilgisayar(1,"bilgisayar");
+        Kullanici user = new Kullanici(2,"user1");
+        nesneUret(bilgisayar.nesneListesi);
+        Makas makas = new Makas();
+        Tas tas = new Tas();
+        double tasEtki = tas.makasSavunma;
+        //double makasEtki = makas.tasSavunma;
+        double hasar = makas.etkiHesapla(tasEtki);
+        makas.durumGuncelle(hasar);
+        makas.nesneOzellikleriGoster();*/
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Kalınlık: " + kalinlik);
-    }
-    @Override
-    double etkiHesapla(double rakipSavunmasi) {
-        return kalinlik * nufuz / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
 
-    // Constructorlar
-    public OzelKagit() {
-        super();
-        this.kalinlik = 2;
-        this.tasSavunma *= kalinlik;
-        this.makasSavunma *= kalinlik;
-    }
-    public OzelKagit(int dayanma, int seviyeP, int nuf, int kalin) {
-        super(dayanma, seviyeP, nuf);
-        this.kalinlik = kalin;
-        this.tasSavunma *= kalinlik;
-        this.makasSavunma *= kalinlik;
     }
 }
 
-// Makas ve alt class'ları
 
-class Makas extends Silah {
-    // Değişkenler
-    int keskinlik;
-    double tasSavunma;
-    double kagitSavunma;
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Keskinlik: " + keskinlik);
-    }
-    double etkiHesapla(double rakipSavunmasi) {
-        return keskinlik / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
 
-    // Constructorlar
-    public Makas() {
-        super();
-        this.keskinlik = 2;
-        this.tasSavunma = 0.2 * keskinlik;
-        this.kagitSavunma = 0.8 * keskinlik;
-    }
-    public Makas(int dayanma, int seviyeP, int keskin) {
-        super(dayanma, seviyeP);
-        this.keskinlik = keskin;
-        this.tasSavunma = 0.2 * keskinlik;
-        this.kagitSavunma = 0.8 * keskinlik;
-    }
-}
-class UstaMakas extends Makas {
-    // Değişkenler
-    int hiz;
 
-    // Fonksiyonlar
-    @Override
-    void nesnePuaniGoster() {
-        super.nesnePuaniGoster();
-        System.out.println("Hız: " + hiz);
-    }
-    @Override
-    double etkiHesapla(double rakipSavunmasi) {
-        return hiz * keskinlik / rakipSavunmasi;
-    }
-    @Override
-    void durumGuncelle(int etki) {
-        super.durumGuncelle(etki);
-    }
-
-    // Constructorlar
-    public UstaMakas() {
-        super();
-        this.hiz = 2;
-        this.tasSavunma *= hiz;
-        this.kagitSavunma *= hiz;
-    }
-    public UstaMakas(int dayanma, int seviyeP, int keskin, int surat) {
-        super(dayanma, seviyeP, keskin);
-        this.hiz = surat;
-        this.tasSavunma *= hiz;
-        this.kagitSavunma *= hiz;
-    }
-}
-
-abstract class Oyuncu {
-    // Değişkenler
-    int oyuncuID;
-    String oyuncuAdi;
-    int skor;
-    List<Object> nesneListesi = new ArrayList<Object>();
-
-    // Fonksiyonlar
-    int SkorGoster() {
-        return skor;
-    }
-    abstract Object nesneSec(int index);
-
-    // Constructorlar
-    public Oyuncu() {
-        this.oyuncuID = 0;
-        this.oyuncuAdi = "Oyuncu";
-        this.skor = 0;
-    }
-    public Oyuncu(int ID, String ad) {
-        this.oyuncuID = ID;
-        this.oyuncuAdi = ad;
-        this.skor = 0;
-    }
-}
-
-class Bilgisayar extends Oyuncu {
-    // Fonksiyonlar
-    @Override
-    Object nesneSec(int index) { // Buradaki index random atılmalı.
-        return nesneListesi.get(index);
-    }
-
-    // Constructorlar
-    public Bilgisayar() {
-        super();
-    }
-    public Bilgisayar(int ID, String ad) {
-        super(ID, ad);
-    }
-}
-
-class Kullanici extends Oyuncu {
-    // Fonksiyonlar
-    @Override
-    Object nesneSec(int index) {
-        return nesneListesi.get(index);
-    }
-
-    // Constructorlar
-    public Kullanici() {
-        super();
-    }
-    public Kullanici(int ID, String ad) {
-        super(ID, ad);
-    }
-}
