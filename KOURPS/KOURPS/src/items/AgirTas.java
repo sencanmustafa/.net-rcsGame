@@ -2,12 +2,14 @@ package items;
 
 public class AgirTas extends Tas {
     // Değişkenler
+    public String isim;
     public int sicaklik;
 
     // Fonksiyonlar
     @Override
     public void nesneOzellikleriGoster() {
         super.nesneOzellikleriGoster();
+        System.out.println("Nesne Ismi : " + isim);
         System.out.println("Sıcaklık: " + sicaklik);
     }
 
@@ -25,6 +27,7 @@ public class AgirTas extends Tas {
     // Constructorlar
     public AgirTas() {
         super();
+        this.isim = "AgirTas";
         this.sicaklik = 2;
         this.makasSavunma *= this.sicaklik;
         this.kagitSavunma *= this.sicaklik;
@@ -32,6 +35,7 @@ public class AgirTas extends Tas {
 
     public AgirTas(int dayanma, int seviyeP, int kati, int sicak) {
         super(dayanma, seviyeP, kati);
+        this.isim = "AgirTas";
         this.sicaklik = sicak;
         this.makasSavunma *= this.sicaklik;
         this.kagitSavunma *= this.sicaklik;

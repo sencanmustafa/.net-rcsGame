@@ -2,12 +2,14 @@ package items;
 
 public class UstaMakas extends Makas {
     // Değişkenler
+    public String isim ;
     public int hiz;
 
     // Fonksiyonlar
     @Override
     public void nesneOzellikleriGoster() {
         super.nesneOzellikleriGoster();
+        System.out.println("Nesne Ismi : " + isim);
         System.out.println("Hız: " + hiz);
     }
 
@@ -24,6 +26,7 @@ public class UstaMakas extends Makas {
     // Constructorlar
     public UstaMakas() {
         super();
+        this.isim = "UstaMakas";
         this.hiz = 2;
         this.tasSavunma *= hiz;
         this.kagitSavunma *= hiz;
@@ -31,6 +34,7 @@ public class UstaMakas extends Makas {
 
     public UstaMakas(int dayanma, int seviyeP, int keskin, int surat) {
         super(dayanma, seviyeP, keskin);
+        this.isim = "UstaMakas";
         this.hiz = surat;
         this.tasSavunma *= hiz;
         this.kagitSavunma *= hiz;

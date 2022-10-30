@@ -1,7 +1,4 @@
-import items.Kagit;
-import items.Makas;
-import items.Nesneler;
-import items.Tas;
+import items.*;
 import business.itemManager;
 import java.sql.SQLOutput;
 import java.util.*;
@@ -30,6 +27,23 @@ public class Oyun
             }
         }
     }
+    public static Nesneler createSpecialObject(String instance)
+    {
+        if (Objects.equals(instance, "class items.Tas"))
+        {
+            return new AgirTas();
+        }
+        if (Objects.equals(instance, "class items.Makas"))
+        {
+            return new UstaMakas();
+        }
+        if (Objects.equals(instance, "class items.Kagit"))
+        {
+            return new OzelKagit();
+        }
+
+        return null;
+    }
     public static void main(String[] args)
     {
 
@@ -52,31 +66,69 @@ public class Oyun
                 Bilgisayar bilgisayar2 = new Bilgisayar(2,"bilgisayar2");
                 nesneUret(bilgisayar.nesneListesi);
                 nesneUret(bilgisayar2.nesneListesi);
+                int hamleSayisi = 0;
                 while (true)
                 {
+                    if (bilgisayar2.nesneListesi.size() == 0)
+                    {
+                        System.out.println("Oyun bitmistir oyunu bilgisayar 1 kazandi");
+                        break;
+                    }
+                    if (bilgisayar.nesneListesi.size()==0)
+                    {
+                        System.out.println("oyun bitmistir oyunu bilgisayar 2 kazandi");
+                        break;
+                    }
                     System.out.println("2 -> savastir");
                     System.out.println("3 -> bilgisayar 1 nesneleri gor");
                     System.out.println("4 -> bilgisayar 2 nesneleri gor");
                     System.out.println("9 -> ust menu");
                     Scanner scanner2 = new Scanner(System.in);
                     System.out.println("bir secim yapiniz");
-                    int secim2 = scanner.nextInt();;
+                    int secim2 = scanner2.nextInt();
+
+                    if (secim2 == 2)
+                    {
+                        hamleSayisi++;
+                    }
                     if (secim2 == 9)
                     {
                         break;
                     }
                     else if (secim2==2)
                     {
-                        for (int i =0;i<5;i++)
+                        if (hamleSayisi==10)
+                        {
+                            System.out.println("*******************************************");
+                            System.out.println("Oyun max hamleye ulasmistir ");
+                            System.out.println("*******************************************");
+                            break;
+                        }
+
+                        int size = bilgisayar2.nesneListesi.size();
+                        int size2 = bilgisayar.nesneListesi.size();
+                        int kucuk;
+                        if (size2>size)
+                        {
+                            kucuk = size;
+                        }
+                        else if (size2==size)
+                        {
+                            kucuk=size2;
+                        }
+                        else
+                        {
+                            kucuk = size2;
+                        }
+                        for (int i =0;i<kucuk;i++)
                         {
                             Nesneler savasan1 = bilgisayar.nesneListesi.get(i);
                             Nesneler savasan2 = bilgisayar2.nesneListesi.get(i);
-                            System.out.println(savasan2.getClass());
-                            System.out.println(savasan1.getClass());
+
                             double savasan1etki = savasan1.etkiHesapla(itemManager.savas(savasan1,savasan2));
-                            System.out.println("sav1 etki " + savasan1etki);
+
                             double savasan2etki = savasan2.etkiHesapla(itemManager.savas(savasan2,savasan1));
-                            System.out.println("sav2 etki " + savasan2etki);
+
                             if (Double.isInfinite(savasan1etki) || Double.isInfinite(savasan2etki))
                             {
                                 System.out.println("berabere");
@@ -94,6 +146,12 @@ public class Oyun
                                 if (savasan2.seviyePuani >=30)
                                 {
                                     System.out.println(savasan2.isim + "30 u asti");
+                                    String instance ;
+                                    instance = String.valueOf(savasan2.getClass());
+                                    bilgisayar2.nesneListesi.remove(savasan2);
+                                    Nesneler specialObject = createSpecialObject(instance);
+                                    System.out.println(specialObject);
+                                    bilgisayar2.nesneListesi.add(specialObject);
                                 }
                                 break;
                             }
@@ -105,6 +163,12 @@ public class Oyun
                                 if (savasan1.seviyePuani>=30)
                                 {
                                     System.out.println(savasan1.isim + "30 u asti");
+                                    String instance2 ;
+                                    instance2 = String.valueOf(savasan1.getClass());
+                                    bilgisayar.nesneListesi.remove(savasan1);
+                                    Nesneler specialObject2 = createSpecialObject(instance2);
+                                    System.out.println(specialObject2);
+                                    bilgisayar.nesneListesi.add(specialObject2);
                                 }
                                 break;
                             }

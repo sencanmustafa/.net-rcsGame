@@ -9,9 +9,11 @@ public abstract class Nesneler {
     // Fonksiyonlar
     public void nesneOzellikleriGoster()
     {
+        System.out.println("***********************");
         System.out.println("Nesne Ismi : " + isim);
         System.out.println("Dayanıklılık: " + dayaniklilik);
         System.out.println("Seviye Puanı: " + seviyePuani);
+        System.out.println("***********************");
     }
 
     public double etkiHesapla(double rakipSavunmasi)
