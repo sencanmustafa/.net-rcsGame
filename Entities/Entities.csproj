@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="user\" />
+    <None Remove="objects\" />
+    <None Remove="objects\Concrete\" />
+    <None Remove="objects\Abstract\" />
+    <None Remove="user\Abstract\" />
+    <None Remove="user\Concrete\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="user\" />
+    <Folder Include="objects\" />
+    <Folder Include="objects\Concrete\" />
+    <Folder Include="objects\Abstract\" />
+    <Folder Include="user\Abstract\" />
+    <Folder Include="user\Concrete\" />
+  </ItemGroup>
+</Project>
