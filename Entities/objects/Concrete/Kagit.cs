@@ -18,7 +18,7 @@ namespace Entities.objects
             Console.WriteLine("Nüfuz: " + nufuz);
         }
 
-        public double etkiHesapla(double rakipSavunmasi)
+        override public double etkiHesapla(double rakipSavunmasi)
         {
             return nufuz / rakipSavunmasi;
         }

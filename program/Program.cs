@@ -31,21 +31,57 @@ namespace ConsoleUI
                     Bilgisayar bilgisayar2 = new Bilgisayar(2, "bilgisayar2");
                     itemManager.nesneUret(bilgisayar.nesneListesi);
                     itemManager.nesneUret(bilgisayar2.nesneListesi);
+                    int hamleSayisi = 0;
                     while (true)
                     {
+                        if (bilgisayar2.nesneListesi.Count == 0)
+                        {
+                            Console.WriteLine("Oyun bitmistir Oyunu bilgisayar 1 kazandi");
+                            break;
+                        }
+                        if (bilgisayar.nesneListesi.Count == 0)
+                        {
+                            Console.WriteLine("Oyun bitmistir oyunu bilgisayar 2 kazandi");
+                            break;
+                        }
                         Console.WriteLine("2 -> savastir");
                         Console.WriteLine("3 -> bilgisayar 1 nesneleri gor");
                         Console.WriteLine("4 -> bilgisayar 2 nesneleri gor");
                         Console.WriteLine("9 -> ust menu");
                         Console.WriteLine("bir secim yapiniz");
-                        int secim2 = Convert.ToInt32(Console.ReadLine()); ;  
+                        int secim2 = Convert.ToInt32(Console.ReadLine()); ;
+                        if (secim2 == 2)
+                        {
+                            hamleSayisi++;
+                        }
                         if (secim2 == 9)
                         {
                             break;
                         }
+
                         else if (secim2 == 2)
                         {
-                            for (int i = 0; i < 5; i++)
+                            if (hamleSayisi == 10)
+                            {
+                                Console.WriteLine("*******************************************");
+                                Console.WriteLine("Oyun max hamleye ulasmistir");
+                                Console.WriteLine("*******************************************");
+                                break;
+                            }
+                            int size;
+                            int size2;
+                            int kucuk;
+                            size = bilgisayar.nesneListesi.Count();
+                            size2 = bilgisayar2.nesneListesi.Count();
+                            if (size>size2)
+                            {
+                                kucuk = size2;
+                            }
+                            else
+                            {
+                                kucuk = size;
+                            }
+                            for (int i = 0; i < kucuk; i++)
                             {
                                 Nesneler savasan1 = bilgisayar.nesneListesi[i];
                                 Nesneler savasan2 = bilgisayar2.nesneListesi[i];

@@ -13,7 +13,7 @@ namespace Entities.objects
             Console.WriteLine("Kalınlık: " + kalinlik);
         }
 
-        public double etkiHesapla(double rakipSavunmasi)
+        override public double etkiHesapla(double rakipSavunmasi)
         {
             return kalinlik * nufuz / rakipSavunmasi;
         }

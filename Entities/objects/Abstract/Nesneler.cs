@@ -16,7 +16,7 @@ namespace Entities.objects
             Console.WriteLine("Seviye Puanı: " + seviyePuani);
         }
 
-        public double etkiHesapla(double rakipSavunmasi)
+        public virtual double etkiHesapla(double rakipSavunmasi)
         {
             return 0;
         }

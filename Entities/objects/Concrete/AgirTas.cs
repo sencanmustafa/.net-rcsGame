@@ -15,7 +15,7 @@ namespace Entities.objects
         }
 
 
-        public double etkiHesapla(double rakipSavunmasi)
+        override public double etkiHesapla(double rakipSavunmasi)
         {
             return (katilik * sicaklik) / rakipSavunmasi;
         }
