@@ -145,7 +145,7 @@
             this.Controls.Add(this.ozellik1);
             this.Controls.Add(this.dayaniklilik);
             this.Controls.Add(this.closeButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Stats";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);

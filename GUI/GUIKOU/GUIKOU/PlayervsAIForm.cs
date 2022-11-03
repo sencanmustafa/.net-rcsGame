@@ -25,31 +25,31 @@ namespace GUIKOU
         private void nesne1_Click(object sender, EventArgs e)
         {
             Stats stat = new Stats();
-            stat.Show();
+            stat.ShowDialog();
         }
 
         private void nesne2_Click(object sender, EventArgs e)
         {
             Stats stat = new Stats();
-            stat.Show();
+            stat.ShowDialog();
         }
 
         private void nesne3_Click(object sender, EventArgs e)
         {
             Stats stat = new Stats();
-            stat.Show();
+            stat.ShowDialog();
         }
 
         private void nesne4_Click(object sender, EventArgs e)
         {
             Stats stat = new Stats();
-            stat.Show();
+            stat.ShowDialog();
         }
 
         private void nesne5_Click(object sender, EventArgs e)
         {
             Stats stat = new Stats();
-            stat.Show();
+            stat.ShowDialog();
         }
     }
 }
