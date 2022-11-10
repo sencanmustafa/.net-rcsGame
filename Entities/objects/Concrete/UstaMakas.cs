@@ -29,6 +29,7 @@ namespace Entities.objects
         // Constructorlar
         public UstaMakas() : base()
         {
+            this.isim = "UstaMakas";
             this.hiz = 2;
             this.tasSavunma *= hiz;
             this.kagitSavunma *= hiz;
@@ -36,6 +37,7 @@ namespace Entities.objects
 
         public UstaMakas(int dayanma, int seviyeP, int keskin, int surat) : base(dayanma, seviyeP, keskin)
         {
+            this.isim = "UstaMakas";
             this.hiz = surat;
             this.tasSavunma *= hiz;
             this.kagitSavunma *= hiz;

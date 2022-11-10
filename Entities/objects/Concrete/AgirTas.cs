@@ -29,6 +29,7 @@ namespace Entities.objects
         // Constructorlar
         public AgirTas() : base()
         {
+            this.isim = "AgirTas";
             this.sicaklik = 2;
             this.makasSavunma *= this.sicaklik;
             this.kagitSavunma *= this.sicaklik;

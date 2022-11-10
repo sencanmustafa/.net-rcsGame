@@ -6,6 +6,26 @@ namespace Business
 {
     public class ItemManager
     {
+
+
+        public Nesneler returnSpecialObject(Nesneler n1)
+        {
+            if (n1 is Makas)
+            {
+                return new UstaMakas();
+            }
+            else if (n1 is Kagit)
+            {
+                return new OzelKagit();
+            }
+            else
+            {
+                return new AgirTas();
+            }
+        }
+
+
+
         public Nesneler returnNesne(int secim)
         {
             if (secim == 1)
@@ -70,7 +90,7 @@ namespace Business
 
 
 
-        public void bilgisayarNesneUret(List<Nesneler> list)
+        public void NesneUret(List<Nesneler> list)
         {
 
             for (int j = 0; j < 5; j++)
@@ -93,15 +113,13 @@ namespace Business
             }
         }
 
-        public void userNesneUret(List<Nesneler> list,int secim1,int secim2)
-        {
-            list.Add(new Tas());
-            list.Add(new Kagit());
-            list.Add(new Makas());
-            list.Add(returnNesne(secim1));
-            list.Add(returnNesne(secim2));
         
-        }
+
+
+
+
+
+
 
     }
 }

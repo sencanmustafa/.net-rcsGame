@@ -7,6 +7,7 @@ namespace Entities.objects
         public String isim;
         public double dayaniklilik;
         public int seviyePuani;
+        public bool selected;
 
         // Fonksiyonlar
         public void nesneOzellikleriGoster()
@@ -34,6 +35,7 @@ namespace Entities.objects
         // Constructorlar
         public Nesneler()
         {
+            this.selected = false;
             this.dayaniklilik = 20;
             this.seviyePuani = 0;
         }

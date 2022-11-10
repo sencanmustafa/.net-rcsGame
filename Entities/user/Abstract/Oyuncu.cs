@@ -8,12 +8,17 @@ namespace Entities.user
         // Değişkenler
         public int oyuncuID;
         public String oyuncuAdi;
-        public int skor;
+        public double skor;
         public List<Nesneler> nesneListesi = new List<Nesneler>();
 
         // Fonksiyonlar
-        int SkorGoster()
+        double SkorGoster()
         {
+            for(int x = 0; x < nesneListesi.Count; x++)
+            {
+                skor += nesneListesi[x].dayaniklilik;
+
+            }
             return skor;
         }
 

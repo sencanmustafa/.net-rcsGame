@@ -14,7 +14,7 @@ namespace ConsoleUI
 
             while (true)
             {
-                Console.WriteLine("1 -> Bilgisayar-Bilgisayar");
+                 Console.WriteLine("1 -> Bilgisayar-Bilgisayar");
                 Console.WriteLine("2 -> Kullacini-Bilgisayar");
                 Console.WriteLine("9 -> cikis");
 
@@ -29,8 +29,8 @@ namespace ConsoleUI
 
                     Bilgisayar bilgisayar = new Bilgisayar(1, "bilgisayar");
                     Bilgisayar bilgisayar2 = new Bilgisayar(2, "bilgisayar2");
-                    itemManager.bilgisayarNesneUret(bilgisayar.nesneListesi);
-                    itemManager.bilgisayarNesneUret(bilgisayar2.nesneListesi);
+                    itemManager.NesneUret(bilgisayar.nesneListesi);
+                    itemManager.NesneUret(bilgisayar2.nesneListesi);
                     int hamleSayisi = 0;
                     while (true)
                     {
@@ -61,7 +61,7 @@ namespace ConsoleUI
 
                         else if (secim2 == 2)
                         {
-                            if (hamleSayisi == 10)
+                            if (hamleSayisi == 30)
                             {
                                 Console.WriteLine("*******************************************");
                                 Console.WriteLine("Oyun max hamleye ulasmistir");
@@ -155,11 +155,9 @@ namespace ConsoleUI
                     Kullanici user1 = new Kullanici(1, "user1");
                     Bilgisayar bilgisayar = new Bilgisayar(1, "bilgisayar");
 
-                    Console.WriteLine("kullanici 2 tane item seciniz -> 1 Tas , 2 Makas , 3 Kagit");
-                    int user1Input1 = Convert.ToInt32(Console.ReadLine());
-                    int user1Input2 = Convert.ToInt32(Console.ReadLine());
-                    itemManager.userNesneUret(user1.nesneListesi, user1Input1, user1Input2);
-                    itemManager.bilgisayarNesneUret(bilgisayar.nesneListesi);
+                   
+                    itemManager.NesneUret(user1.nesneListesi);
+                    itemManager.NesneUret(bilgisayar.nesneListesi);
                     int hamleSayisi = 0;
                     while (true)
                     {
@@ -193,7 +191,7 @@ namespace ConsoleUI
                         else if (secim2 == 2)
                         {
 
-                            if (hamleSayisi == 10)
+                            if (hamleSayisi == 50)
                             {
                                 Console.WriteLine("*******************************************");
                                 Console.WriteLine("Oyun max hamleye ulasmistir");
@@ -207,6 +205,13 @@ namespace ConsoleUI
                                     Console.WriteLine("oyunu bilgisayar kazanmistir");
                                 }
                                 break;
+                            }
+                            if (hamleSayisi == 5)
+                            {
+                                for (int i = 0; i < user1.nesneListesi.Count; i++)
+                                {
+                                    user1.nesneListesi[i].selected = false;
+                                }
                             }
 
                             int size;
@@ -222,7 +227,7 @@ namespace ConsoleUI
                             {
                                 kucuk = size;
                             }
-                            
+                            goTo:
                             Console.WriteLine("Oynamak istediginiz objeyi secin");
                             int x = 0;
                             foreach (Nesneler item in user1.nesneListesi)
@@ -231,7 +236,17 @@ namespace ConsoleUI
                                 Console.WriteLine(x + " -> " + item.isim);
                                 x++;
                             }
+                            
                             int choose = Convert.ToInt32(Console.ReadLine());
+                            if (user1.nesneListesi[choose].selected == true)
+                            {
+                                Console.WriteLine("bu nesne daha onceden secilmis lutfen farkli bir nesne seciniz...");
+                                goto goTo;
+                            }
+                            if (hamleSayisi < 5)
+                            {
+                                user1.nesneListesi[choose].selected = true;
+                            }
                             Nesneler savasan1 = user1.nesneListesi[choose];
                             Random r = new Random();
                             int randomInt = r.Next(size2);
@@ -248,25 +263,31 @@ namespace ConsoleUI
                             }
                             savasan1.durumGuncelle(savasan2etki);
                             savasan2.durumGuncelle(savasan1etki);
-                            if (savasan1.dayaniklilik <= 0)
+                            if (savasan1.dayaniklilik <= 16)
                             {
                                 user1.nesneListesi.Remove(savasan1);
                                 savasan2.seviyePuani += 20;
                                 if (savasan2.seviyePuani >= 30)
                                 {
-                                    Console.WriteLine(savasan2.isim + "30 u asti");                               }
-                                break;
+                                    Console.WriteLine(savasan2.isim + "30 u asti");
+                                    bilgisayar.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
+                                    bilgisayar.nesneListesi.Remove(savasan2);
+
+                                }
+                                
                             }
 
-                            if (savasan2.dayaniklilik <= 0)
+                            if (savasan2.dayaniklilik <= 16)
                             {
                                 bilgisayar.nesneListesi.Remove(savasan2);
                                 savasan1.seviyePuani += 20;
                                 if (savasan1.seviyePuani >= 30)
                                 {
                                     Console.WriteLine(savasan1.isim + "30 u asti");
+                                    user1.nesneListesi.Add(itemManager.returnSpecialObject(savasan1));
+                                    user1.nesneListesi.Remove(savasan1);
                                 }
-                                break;
+                                
                             }
                                 Console.WriteLine("*******************************************");
                                 savasan1.nesneOzellikleriGoster();

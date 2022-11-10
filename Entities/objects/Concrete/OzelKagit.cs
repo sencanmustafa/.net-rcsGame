@@ -7,6 +7,7 @@ namespace Entities.objects
 
         // Fonksiyonlar
 
+
         public void nesneOzellikleriGoster()
         {
             base.nesneOzellikleriGoster();
@@ -26,6 +27,7 @@ namespace Entities.objects
         // Constructorlar
         public OzelKagit() : base()
         {
+            this.isim = "OzelKagit";
             this.kalinlik = 2;
             this.tasSavunma *= kalinlik;
             this.makasSavunma *= kalinlik;
