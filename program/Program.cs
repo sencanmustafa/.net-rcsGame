@@ -8,7 +8,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        static void Main(String[] args)
+        static  void Main(String[] args)
         {
             ItemManager itemManager = new ItemManager();
 
@@ -26,7 +26,7 @@ namespace ConsoleUI
                 }
                 else if (secim == 1)
                 {
-
+                    
                     Bilgisayar bilgisayar = new Bilgisayar(1, "bilgisayar");
                     Bilgisayar bilgisayar2 = new Bilgisayar(2, "bilgisayar2");
                     itemManager.NesneUret(bilgisayar.nesneListesi);
@@ -104,31 +104,39 @@ namespace ConsoleUI
                                     Console.WriteLine("berabere");
                                     continue;
                                 }
-
+                                if (savasan1etki>savasan2etki)
+                                {
+                                    savasan1.seviyePuani += 20;
+                                    
+                                }
+                                if (savasan2etki>savasan1etki)
+                                {
+                                    savasan2.seviyePuani += 20;
+                                }
                                 savasan1.nesneOzellikleriGoster();
                                 savasan2.nesneOzellikleriGoster();
                                 savasan1.durumGuncelle(savasan2etki);
-                                savasan2.durumGuncelle(savasan1etki);
+                                savasan2.durumGuncelle(savasan1etki); 
                                 if (savasan1.dayaniklilik <= 0)
                                 {
                                     bilgisayar.nesneListesi.Remove(savasan1);
-                                    savasan2.seviyePuani += 20;
-                                    if (savasan2.seviyePuani >= 30)
-                                    {
-                                        Console.WriteLine(savasan2.isim + "30 u asti");
-                                    }
+                                    
                                     break;
                                 }
-
+                                if (savasan1.seviyePuani >= 30)
+                                {
+                                    bilgisayar.nesneListesi.Add(itemManager.returnSpecialObject(savasan1));
+                                    bilgisayar.nesneListesi.Remove(savasan1);
+                                }
                                 if (savasan2.dayaniklilik <= 0)
                                 {
                                     bilgisayar2.nesneListesi.Remove(savasan2);
-                                    savasan1.seviyePuani += 20;
-                                    if (savasan1.seviyePuani >= 30)
-                                    {
-                                        Console.WriteLine(savasan1.isim + "30 u asti");
-                                    }
                                     break;
+                                }
+                                if (savasan2.seviyePuani>=30)
+                                {
+                                    bilgisayar2.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
+                                    bilgisayar2.nesneListesi.Remove(savasan2);
                                 }
                                 savasan1.nesneOzellikleriGoster();
                                 savasan2.nesneOzellikleriGoster();
@@ -253,42 +261,46 @@ namespace ConsoleUI
                             Nesneler savasan2 = bilgisayar.nesneListesi[randomInt];
                                 
                             double savasan1etki = savasan1.etkiHesapla(itemManager.savas(savasan1, savasan2));
-                            Console.WriteLine("sav1 etki " + savasan1etki);
+                            
                             double savasan2etki = savasan2.etkiHesapla(itemManager.savas(savasan2, savasan1));
-                            Console.WriteLine("sav2 etki " + savasan2etki);
+                            
                             if (Double.IsInfinity(savasan1etki) || Double.IsInfinity(savasan2etki))
                             {
                                 Console.WriteLine("berabere");
                                 continue;
                             }
+                            if (savasan1etki > savasan2etki)
+                            {
+                                savasan1.seviyePuani += 20;
+
+                            }
+                            if (savasan2etki>savasan1etki)
+                            {
+                                savasan2.seviyePuani += 20;
+                            }
                             savasan1.durumGuncelle(savasan2etki);
                             savasan2.durumGuncelle(savasan1etki);
-                            if (savasan1.dayaniklilik <= 16)
+                            if (savasan1.dayaniklilik <= 0)
                             {
+                                user1.nesneListesi.Remove(savasan1);                                                           
+                            }
+                            if (savasan1.seviyePuani >= 30)
+                            {
+                                Console.WriteLine(savasan1.isim + " 30 puani asti ");
+                                user1.nesneListesi.Add(itemManager.returnSpecialObject(savasan1));
                                 user1.nesneListesi.Remove(savasan1);
-                                savasan2.seviyePuani += 20;
-                                if (savasan2.seviyePuani >= 30)
-                                {
-                                    Console.WriteLine(savasan2.isim + "30 u asti");
-                                    bilgisayar.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
-                                    bilgisayar.nesneListesi.Remove(savasan2);
-
-                                }
-                                
                             }
-
-                            if (savasan2.dayaniklilik <= 16)
+                            if (savasan2.dayaniklilik <= 0)
                             {
-                                bilgisayar.nesneListesi.Remove(savasan2);
-                                savasan1.seviyePuani += 20;
-                                if (savasan1.seviyePuani >= 30)
-                                {
-                                    Console.WriteLine(savasan1.isim + "30 u asti");
-                                    user1.nesneListesi.Add(itemManager.returnSpecialObject(savasan1));
-                                    user1.nesneListesi.Remove(savasan1);
-                                }
-                                
+                                bilgisayar.nesneListesi.Remove(savasan2);                             
                             }
+                            if (savasan2.seviyePuani >= 30)
+                            {
+                                Console.WriteLine(savasan2.isim + " 30 puani asti ");
+                                bilgisayar.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
+                                bilgisayar.nesneListesi.Remove(savasan2);
+                            }
+
                                 Console.WriteLine("*******************************************");
                                 savasan1.nesneOzellikleriGoster();
                                 Console.WriteLine("*******************************************");

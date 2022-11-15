@@ -7,7 +7,14 @@ namespace Business
     public class ItemManager
     {
 
-
+        public void selectObject(List<int> list,List<Nesneler> userList)
+        {
+            userList.Add(returnNesne(list[0]));
+            userList.Add(returnNesne(list[1]));
+            userList.Add(returnNesne(list[2]));
+            userList.Add(returnNesne(list[3]));
+            userList.Add(returnNesne(list[4]));
+        }
         public Nesneler returnSpecialObject(Nesneler n1)
         {
             if (n1 is Makas)
