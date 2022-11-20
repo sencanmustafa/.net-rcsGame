@@ -7,6 +7,27 @@ namespace Business
     public class ItemManager
     {
 
+
+        public int defineInstance(String name)
+        {
+            if (name=="Makas")
+            {
+                int x = 2;
+                return x;
+            }
+            else if (name == "Tas")
+            {
+                int b = 1;
+                return b;
+            }
+            else
+            {
+                int c = 0;
+                return c;
+            }
+        }
+
+
         public void selectObject(List<int> list,List<Nesneler> userList)
         {
             userList.Add(returnNesne(list[0]));
@@ -43,9 +64,13 @@ namespace Business
             {
                 return new Makas();
             }
-            else
+            else if (secim==0)
             {
                 return new Kagit();
+            }
+            else
+            {
+                return new Tas();
             }
         }
 

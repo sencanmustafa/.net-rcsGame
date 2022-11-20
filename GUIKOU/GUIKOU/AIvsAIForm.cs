@@ -28,21 +28,9 @@ namespace GUIKOU
             this.bilgisayar2 = new Bilgisayar(2, "bilgisayar2");
             this.manager = new ItemManager();
             manager.NesneUret(bilgisayar.nesneListesi);
-            int locationValue = 150;
-            //manager.NesneUret(bilgisayar.nesneListesi);
-            foreach (var item in bilgisayar.nesneListesi)
-            {
-                Label lbl = new Label();
-                lbl.Tag = item;
-                lbl.Text = item.isim.ToString();
-                lbl.Location = new Point(locationValue, 50);
-                locationValue += 100;
-                
-            }
-            manager.NesneUret(bilgisayar2.nesneListesi);
-            nesne1.Text = bilgisayar.nesneListesi[0].isim;
-            
 
+            //manager.NesneUret(bilgisayar.nesneListesi);          
+            manager.NesneUret(bilgisayar2.nesneListesi);
         }
 
         public void savas()
@@ -243,41 +231,84 @@ namespace GUIKOU
             stat.ShowDialog();
         }
 
-        private void nesne2_Click(object sender, EventArgs e)
-        {
-            Stats stat = new Stats();
-            stat.ShowDialog();
-        }
+        
         private void nesne_Click(object sender, EventArgs e)
         {
-            var lbl = (Label)sender;
-            var a = lbl.Text;
-            var nesne = (Nesneler)lbl.Tag;
-            
-            Stats stat = new Stats(bilgisayar.nesneListesi[0].isim, bilgisayar.nesneListesi[0].dayaniklilik);
-            stat.ShowDialog();
+            try
+            {
+
+                Stats stat = new Stats(bilgisayar.nesneListesi[0].isim, bilgisayar.nesneListesi[0].dayaniklilik);
+                stat.ShowDialog();
+            }
+            catch (Exception)
+            {
+                Stats stat = new Stats();
+                stat.ShowDialog();
+                throw;
+            }
         }
 
+        private void nesne2_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
+                Stats stat = new Stats(bilgisayar.nesneListesi[1].isim, bilgisayar.nesneListesi[1].dayaniklilik);
+                stat.ShowDialog();
+            }
+            catch (Exception)
+            {
+                Stats stat = new Stats();
+                stat.ShowDialog();
+                throw;
+            }
+        }
         private void nesne1_Click(object sender, EventArgs e)
         {
-            var lbl = (Label)sender;
-         
-            var nesne = (Nesneler)lbl.Tag;
-            Stats stat = new Stats(nesne.isim, nesne.dayaniklilik);
-            stat.ShowDialog();
+            try
+            {
+
+                Stats stat = new Stats(bilgisayar.nesneListesi[2].isim, bilgisayar.nesneListesi[2].dayaniklilik);
+                stat.ShowDialog();
+            }
+            catch (Exception)
+            {
+                Stats stat = new Stats();
+                stat.ShowDialog();
+                throw;
+            }
         }
 
         private void nesne4_Click(object sender, EventArgs e)
         {
-            Stats stat = new Stats();
-            stat.ShowDialog();
+            try
+            {
+
+                Stats stat = new Stats(bilgisayar.nesneListesi[3].isim, bilgisayar.nesneListesi[3].dayaniklilik);
+                stat.ShowDialog();
+            }
+            catch (Exception)
+            {
+                Stats stat = new Stats();
+                stat.ShowDialog();
+                throw;
+            }
         }
 
         private void nesne5_Click(object sender, EventArgs e)
         {
-            Stats stat = new Stats();
-            stat.ShowDialog();
+            try
+            {
+
+                Stats stat = new Stats(bilgisayar.nesneListesi[4].isim, bilgisayar.nesneListesi[4].dayaniklilik);
+                stat.ShowDialog();
+            }
+            catch (Exception)
+            {
+                Stats stat = new Stats();
+                stat.ShowDialog();
+                throw;
+            }
         }
 
         private void aiNesne1_Click(object sender, EventArgs e)
@@ -344,7 +375,7 @@ namespace GUIKOU
             }
             
         }
-
+        
         private void aiNesne5_Click(object sender, EventArgs e)
         {
             try
@@ -384,6 +415,11 @@ namespace GUIKOU
         }
 
         private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_3(object sender, EventArgs e)
         {
 
         }

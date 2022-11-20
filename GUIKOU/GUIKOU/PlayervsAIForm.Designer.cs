@@ -42,6 +42,7 @@
             this.aiNesne3 = new System.Windows.Forms.Label();
             this.aiNesne4 = new System.Windows.Forms.Label();
             this.aiNesne5 = new System.Windows.Forms.Label();
+            this.fight = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // closeButton
@@ -133,7 +134,7 @@
             // aiNesne1
             // 
             this.aiNesne1.BackColor = System.Drawing.Color.Transparent;
-            this.aiNesne1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aiNesne1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aiNesne1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.aiNesne1.Location = new System.Drawing.Point(104, 15);
             this.aiNesne1.Name = "aiNesne1";
@@ -141,11 +142,12 @@
             this.aiNesne1.TabIndex = 15;
             this.aiNesne1.Text = "?";
             this.aiNesne1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.aiNesne1.Click += new System.EventHandler(this.aiNesne1_Click);
             // 
             // aiNesne2
             // 
             this.aiNesne2.BackColor = System.Drawing.Color.Transparent;
-            this.aiNesne2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aiNesne2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aiNesne2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.aiNesne2.Location = new System.Drawing.Point(267, 15);
             this.aiNesne2.Name = "aiNesne2";
@@ -153,11 +155,12 @@
             this.aiNesne2.TabIndex = 16;
             this.aiNesne2.Text = "?";
             this.aiNesne2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.aiNesne2.Click += new System.EventHandler(this.aiNesne2_Click);
             // 
             // aiNesne3
             // 
             this.aiNesne3.BackColor = System.Drawing.Color.Transparent;
-            this.aiNesne3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aiNesne3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aiNesne3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.aiNesne3.Location = new System.Drawing.Point(429, 15);
             this.aiNesne3.Name = "aiNesne3";
@@ -165,11 +168,12 @@
             this.aiNesne3.TabIndex = 17;
             this.aiNesne3.Text = "?";
             this.aiNesne3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.aiNesne3.Click += new System.EventHandler(this.aiNesne3_Click);
             // 
             // aiNesne4
             // 
             this.aiNesne4.BackColor = System.Drawing.Color.Transparent;
-            this.aiNesne4.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aiNesne4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aiNesne4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.aiNesne4.Location = new System.Drawing.Point(593, 15);
             this.aiNesne4.Name = "aiNesne4";
@@ -177,11 +181,12 @@
             this.aiNesne4.TabIndex = 18;
             this.aiNesne4.Text = "?";
             this.aiNesne4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.aiNesne4.Click += new System.EventHandler(this.aiNesne4_Click);
             // 
             // aiNesne5
             // 
             this.aiNesne5.BackColor = System.Drawing.Color.Transparent;
-            this.aiNesne5.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aiNesne5.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aiNesne5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.aiNesne5.Location = new System.Drawing.Point(756, 15);
             this.aiNesne5.Name = "aiNesne5";
@@ -189,6 +194,17 @@
             this.aiNesne5.TabIndex = 19;
             this.aiNesne5.Text = "?";
             this.aiNesne5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.aiNesne5.Click += new System.EventHandler(this.aiNesne5_Click);
+            // 
+            // fight
+            // 
+            this.fight.Location = new System.Drawing.Point(455, 451);
+            this.fight.Name = "fight";
+            this.fight.Size = new System.Drawing.Size(87, 35);
+            this.fight.TabIndex = 20;
+            this.fight.Text = "savas";
+            this.fight.UseVisualStyleBackColor = true;
+            this.fight.Click += new System.EventHandler(this.fight_Click);
             // 
             // PlayervsAIForm
             // 
@@ -198,6 +214,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(998, 748);
             this.ControlBox = false;
+            this.Controls.Add(this.fight);
             this.Controls.Add(this.aiNesne5);
             this.Controls.Add(this.aiNesne4);
             this.Controls.Add(this.aiNesne3);
@@ -234,5 +251,6 @@
         private Label aiNesne3;
         private Label aiNesne4;
         private Label aiNesne5;
+        private Button fight;
     }
 }

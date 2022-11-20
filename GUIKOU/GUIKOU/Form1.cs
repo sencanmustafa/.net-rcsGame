@@ -9,14 +9,10 @@ namespace GUIKOU
 
         private void PlayervsAI_Click(object sender, EventArgs e)
         {
-            Form2 input = new Form2();
-            if (input.ShowDialog() == DialogResult.OK)
-            {
-                input.sa.Item1= "";
-            }
-            PlayervsAIForm playervsAI = new PlayervsAIForm();
+
+            InputForm _form = new InputForm();
             this.Hide();
-            playervsAI.Show();
+            _form.Show();
         }
 
         private void AIvsAI_Click(object sender, EventArgs e)

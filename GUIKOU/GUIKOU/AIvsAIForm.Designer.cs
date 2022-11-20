@@ -43,6 +43,10 @@
             this.nesne3 = new System.Windows.Forms.Label();
             this.nesne4 = new System.Windows.Forms.Label();
             this.nesne5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // closeButton
@@ -154,9 +158,8 @@
             this.nesne2.AutoSize = true;
             this.nesne2.Location = new System.Drawing.Point(317, 659);
             this.nesne2.Name = "nesne2";
-            this.nesne2.Size = new System.Drawing.Size(38, 15);
+            this.nesne2.Size = new System.Drawing.Size(0, 15);
             this.nesne2.TabIndex = 29;
-            this.nesne2.Text = "label1";
             this.nesne2.Click += new System.EventHandler(this.label1_Click_2);
             // 
             // nesne3
@@ -164,18 +167,16 @@
             this.nesne3.AutoSize = true;
             this.nesne3.Location = new System.Drawing.Point(481, 659);
             this.nesne3.Name = "nesne3";
-            this.nesne3.Size = new System.Drawing.Size(38, 15);
+            this.nesne3.Size = new System.Drawing.Size(0, 15);
             this.nesne3.TabIndex = 30;
-            this.nesne3.Text = "label2";
             // 
             // nesne4
             // 
             this.nesne4.AutoSize = true;
             this.nesne4.Location = new System.Drawing.Point(642, 659);
             this.nesne4.Name = "nesne4";
-            this.nesne4.Size = new System.Drawing.Size(38, 15);
+            this.nesne4.Size = new System.Drawing.Size(0, 15);
             this.nesne4.TabIndex = 31;
-            this.nesne4.Text = "label3";
             // 
             // nesne5
             // 
@@ -186,6 +187,47 @@
             this.nesne5.TabIndex = 32;
             this.nesne5.Text = "label4";
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(268, 596);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 140);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click_3);
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Location = new System.Drawing.Point(431, 596);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 140);
+            this.label2.TabIndex = 34;
+            this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Location = new System.Drawing.Point(593, 596);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(140, 140);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "label3";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(755, 596);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(140, 140);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "label4";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // AIvsAIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -195,6 +237,10 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(998, 748);
             this.ControlBox = false;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.nesne5);
             this.Controls.Add(this.nesne4);
             this.Controls.Add(this.nesne3);
@@ -234,5 +280,9 @@
         private Label nesne3;
         private Label nesne4;
         private Label nesne5;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }
