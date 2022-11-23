@@ -27,7 +27,6 @@ namespace Business
             }
         }
 
-
         public void selectObject(List<int> list,List<Nesneler> userList)
         {
             userList.Add(returnNesne(list[0]));
@@ -51,8 +50,6 @@ namespace Business
                 return new AgirTas();
             }
         }
-
-
 
         public Nesneler returnNesne(int secim)
         {
@@ -117,11 +114,6 @@ namespace Business
             
             return savunma;
         }
-
-
-
-
-
         public void NesneUret(List<Nesneler> list)
         {
 
@@ -145,7 +137,13 @@ namespace Business
             }
         }
 
-        
+        public Nesneler returnRandomObject(List<Nesneler> list)
+        {
+            int listSize = list.Count;
+            Random r = new Random();
+            int randomInt = r.Next(listSize);
+            return list[randomInt];
+        }
 
 
 

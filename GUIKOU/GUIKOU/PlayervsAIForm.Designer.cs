@@ -43,6 +43,12 @@
             this.aiNesne4 = new System.Windows.Forms.Label();
             this.aiNesne5 = new System.Windows.Forms.Label();
             this.fight = new System.Windows.Forms.Button();
+            this.denemeButton = new System.Windows.Forms.Button();
+            this.userItem0 = new System.Windows.Forms.Button();
+            this.userItem1 = new System.Windows.Forms.Button();
+            this.userItem2 = new System.Windows.Forms.Button();
+            this.userItem3 = new System.Windows.Forms.Button();
+            this.userItem4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // closeButton
@@ -206,14 +212,81 @@
             this.fight.UseVisualStyleBackColor = true;
             this.fight.Click += new System.EventHandler(this.fight_Click);
             // 
+            // denemeButton
+            // 
+            this.denemeButton.Location = new System.Drawing.Point(941, 613);
+            this.denemeButton.Name = "denemeButton";
+            this.denemeButton.Size = new System.Drawing.Size(75, 23);
+            this.denemeButton.TabIndex = 21;
+            this.denemeButton.Text = "Button";
+            this.denemeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.denemeButton.UseVisualStyleBackColor = true;
+            this.denemeButton.Click += new System.EventHandler(this.denemeButton_Click);
+            // 
+            // userItem0
+            // 
+            this.userItem0.Location = new System.Drawing.Point(132, 613);
+            this.userItem0.Name = "userItem0";
+            this.userItem0.Size = new System.Drawing.Size(75, 23);
+            this.userItem0.TabIndex = 22;
+            this.userItem0.Text = "Savas";
+            this.userItem0.UseVisualStyleBackColor = true;
+            this.userItem0.Click += new System.EventHandler(this.userItem0_Click);
+            // 
+            // userItem1
+            // 
+            this.userItem1.Location = new System.Drawing.Point(300, 613);
+            this.userItem1.Name = "userItem1";
+            this.userItem1.Size = new System.Drawing.Size(75, 23);
+            this.userItem1.TabIndex = 23;
+            this.userItem1.Text = "Savas";
+            this.userItem1.UseVisualStyleBackColor = true;
+            this.userItem1.Click += new System.EventHandler(this.userItem1_Click);
+            // 
+            // userItem2
+            // 
+            this.userItem2.Location = new System.Drawing.Point(467, 613);
+            this.userItem2.Name = "userItem2";
+            this.userItem2.Size = new System.Drawing.Size(75, 23);
+            this.userItem2.TabIndex = 24;
+            this.userItem2.Text = "savas";
+            this.userItem2.UseVisualStyleBackColor = true;
+            this.userItem2.Click += new System.EventHandler(this.userItem2_Click);
+            // 
+            // userItem3
+            // 
+            this.userItem3.Location = new System.Drawing.Point(618, 613);
+            this.userItem3.Name = "userItem3";
+            this.userItem3.Size = new System.Drawing.Size(75, 23);
+            this.userItem3.TabIndex = 25;
+            this.userItem3.Text = "savas";
+            this.userItem3.UseVisualStyleBackColor = true;
+            this.userItem3.Click += new System.EventHandler(this.userItem3_Click);
+            // 
+            // userItem4
+            // 
+            this.userItem4.Location = new System.Drawing.Point(787, 613);
+            this.userItem4.Name = "userItem4";
+            this.userItem4.Size = new System.Drawing.Size(75, 23);
+            this.userItem4.TabIndex = 26;
+            this.userItem4.Text = "savas";
+            this.userItem4.UseVisualStyleBackColor = true;
+            this.userItem4.Click += new System.EventHandler(this.userItem4_Click);
+            // 
             // PlayervsAIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(66)))), ((int)(((byte)(88)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(998, 748);
+            this.ClientSize = new System.Drawing.Size(1030, 698);
             this.ControlBox = false;
+            this.Controls.Add(this.userItem4);
+            this.Controls.Add(this.userItem3);
+            this.Controls.Add(this.userItem2);
+            this.Controls.Add(this.userItem1);
+            this.Controls.Add(this.userItem0);
+            this.Controls.Add(this.denemeButton);
             this.Controls.Add(this.fight);
             this.Controls.Add(this.aiNesne5);
             this.Controls.Add(this.aiNesne4);
@@ -252,5 +325,11 @@
         private Label aiNesne4;
         private Label aiNesne5;
         private Button fight;
+        private Button denemeButton;
+        private Button userItem0;
+        private Button userItem1;
+        private Button userItem2;
+        private Button userItem3;
+        private Button userItem4;
     }
 }

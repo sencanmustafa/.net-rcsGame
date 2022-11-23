@@ -29,10 +29,19 @@ namespace GUIKOU
             this.user = new Kullanici();
             this.itemManager = new ItemManager();
             itemManager.NesneUret(bilgisayar.nesneListesi);
-            itemManager.selectObject(inputList, user.nesneListesi);
+            itemManager.selectObject(recieveList, user.nesneListesi);
+
         }
-        public void savas()
+        public void savas(Nesneler userSavasan)
         {
+            int userListSizeExceptNull = 0;
+            for (int i = 0; i < user.nesneListesi.Count; i++)
+            {
+                if (user.nesneListesi[i]!=null)
+                {
+                    userListSizeExceptNull += 1;
+                }
+            }
             if (user.nesneListesi.Count == 0)
             {
                 MessageBox.Show("Oyun bitmistir Oyunu bilgisayar 1 kazandi");
@@ -40,15 +49,15 @@ namespace GUIKOU
             }
             if (bilgisayar.nesneListesi.Count == 0)
             {
-                MessageBox.Show("Oyun bitmistir oyunu bilgisayar 2 kazandi");
-                return;
+                MessageBox.Show("Oyun bitmistir oyunu user kazandi");
+                Application.Exit();
             }
 
             hamleSayisi++;
             if (hamleSayisi == 30)
             {
                 MessageBox.Show("Oyun max hamleye ulasmistir");
-                if (bilgisayar.nesneListesi.Count > user.nesneListesi.Count)
+                if (bilgisayar.nesneListesi.Count > userListSizeExceptNull)
                 {
                     MessageBox.Show("Oyunu bilgisayar  kazanmistir");
                 }
@@ -71,11 +80,12 @@ namespace GUIKOU
             {
                 kucuk = size;
             }
+            /*
             for (int i = 0; i < kucuk; i++)
             {
                 Nesneler savasan1 = bilgisayar.nesneListesi[i];
                 aiOynanan.Text = savasan1.isim.ToString();
-                Nesneler savasan2 = user.nesneListesi[i];
+                Nesneler savasan2 = userSavasan;
                 oynanan.Text = savasan2.isim.ToString();
                 double savasan1etki = savasan1.etkiHesapla(itemManager.savas(savasan1, savasan2));
                 double savasan2etki = savasan2.etkiHesapla(itemManager.savas(savasan2, savasan1));
@@ -96,6 +106,7 @@ namespace GUIKOU
 
                 savasan1.durumGuncelle(savasan2etki);
                 savasan2.durumGuncelle(savasan1etki);
+                savasan2.selected= true;
                 if (savasan1.dayaniklilik <= 0)
                 {
                     bilgisayar.nesneListesi.Remove(savasan1);
@@ -117,12 +128,96 @@ namespace GUIKOU
                     user.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
                     user.nesneListesi.Remove(savasan2);
                 }
+                if (hamleSayisi==5)
+                {
+                    for (int x = 0; x < user.nesneListesi.Count; x++)
+                    {
+                        user.nesneListesi[x].selected = false;
 
+                    }
+                    userItem0.Enabled = true;
+                    userItem1.Enabled = true;
+                    userItem2.Enabled = true;
+                    userItem3.Enabled = true;
+                    userItem4.Enabled = true;
+                }
+            }
+            */
+            Nesneler savasan1 = itemManager.returnRandomObject(bilgisayar.nesneListesi);
+            aiOynanan.Text = savasan1.isim.ToString();
+            Nesneler savasan2 = userSavasan;
+            if (savasan2 == null || savasan1==null)
+            {
+                return;
+            }
+            oynanan.Text = savasan2.isim.ToString();
+            double savasan1etki = savasan1.etkiHesapla(itemManager.savas(savasan1, savasan2));
+            double savasan2etki = savasan2.etkiHesapla(itemManager.savas(savasan2, savasan1));
+            if (Double.IsInfinity(savasan1etki) || Double.IsInfinity(savasan2etki))
+            {
+                savasan2.selected = true;
+                return;
+            }
+            if (savasan1etki > savasan2etki)
+            {
+                savasan1.seviyePuani += 20;
+
+            }
+            if (savasan2etki > savasan1etki)
+            {
+                savasan2.seviyePuani += 20;
+            }
+
+            savasan1.durumGuncelle(savasan2etki);
+            savasan2.durumGuncelle(savasan1etki);
+            savasan2.selected = true;
+            if (savasan1.dayaniklilik <= 0)
+            {
+                bilgisayar.nesneListesi.Remove(savasan1);
+
+                
+            }
+            if (savasan1.seviyePuani >= 30)
+            {
+                bilgisayar.nesneListesi.Add(itemManager.returnSpecialObject(savasan1));
+                bilgisayar.nesneListesi.Remove(savasan1);
+            }
+            if (savasan2.dayaniklilik <= 0)
+            {
+                int savasan2Index = user.nesneListesi.IndexOf(savasan2);
+                user.nesneListesi[savasan2Index] = null;
+                var item = user.nesneListesi[0];
+            }
+            if (savasan2.seviyePuani >= 30)
+            {
+                user.nesneListesi.Add(itemManager.returnSpecialObject(savasan2));
+                user.nesneListesi.Remove(savasan2);
+            }
+            if (hamleSayisi == 5)
+            {
+                for (int x = 0; x < user.nesneListesi.Count; x++)
+                {
+                    user.nesneListesi[x].selected = false;
+
+                }
+                userItem0.Enabled = true;
+                userItem1.Enabled = true;
+                userItem2.Enabled = true;
+                userItem3.Enabled = true;
+                userItem4.Enabled = true;
             }
         }
 
         public void refreshLabels()
         {
+            if (hamleSayisi>=5)
+            {
+                userItem0.Enabled = user.nesneListesi[0] != null ? true : false;
+                userItem1.Enabled = user.nesneListesi[1] != null ? true : false;
+                userItem2.Enabled = user.nesneListesi[2] != null ? true : false;
+                userItem3.Enabled = user.nesneListesi[3] != null ? true : false;
+                userItem4.Enabled = user.nesneListesi[4] != null ? true : false;
+            }
             try
             {
                 aiNesne1.Text = bilgisayar.nesneListesi[0].isim;
@@ -234,7 +329,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -250,7 +345,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -266,7 +361,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -282,7 +377,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -298,7 +393,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -319,7 +414,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -335,7 +430,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -351,7 +446,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -367,7 +462,7 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
@@ -383,15 +478,175 @@ namespace GUIKOU
             {
                 Stats stat = new Stats();
                 stat.ShowDialog();
-                throw;
+                return;
             }
         }
 
         private void fight_Click(object sender, EventArgs e)
         {
-            savas();
+            
+            savas(user.nesneListesi[0]);
             refreshLabels();
             return;
+        }
+
+        private void denemeButton_Click(object sender, EventArgs e)
+        {
+            savas(user.nesneListesi[0]);
+            denemeButton.Enabled = false;
+            refreshLabels();
+        }
+
+        private void userItem0_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (user.nesneListesi[0] == null)
+                {
+                    userItem0.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                savas(user.nesneListesi[0]);
+                if (user.nesneListesi[0] == null)
+                {
+                    userItem0.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                if (user.nesneListesi[0].selected == true && hamleSayisi < 5)
+                {
+                    userItem0.Enabled = false;
+                }
+                refreshLabels();
+            }
+            catch (Exception)
+            {
+                
+                return;
+            }
+            
+        }
+
+        private void userItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (user.nesneListesi[1] == null)
+                {
+                    userItem1.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                savas(user.nesneListesi[1]);
+                if (user.nesneListesi[1] == null)
+                {
+                    userItem1.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                if (user.nesneListesi[1].selected == true && hamleSayisi<5)
+                {
+                    userItem1.Enabled = false;
+                }
+                refreshLabels();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
+        }
+
+        private void userItem2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (user.nesneListesi[2] == null)
+                {
+                    userItem2.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                savas(user.nesneListesi[2]);
+                if (user.nesneListesi[2] == null)
+                {
+                    userItem2.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                if (user.nesneListesi[2].selected == true && hamleSayisi < 5)
+                {
+                    userItem2.Enabled = false;
+                }
+                refreshLabels();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
+        }
+
+        private void userItem3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (user.nesneListesi[3] == null)
+                {
+                    userItem3.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+               
+                savas(user.nesneListesi[3]);
+                if (user.nesneListesi[3] == null)
+                {
+                    userItem3.Enabled = false;
+                    refreshLabels();
+                    return;
+                }
+                if (user.nesneListesi[3].selected == true && hamleSayisi < 5)
+                {
+                    userItem3.Enabled = false;
+                }
+                refreshLabels();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
+        }
+
+        private void userItem4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (user.nesneListesi[4].selected == true)
+                {
+                    userItem4.Enabled = false;
+                }
+                savas(user.nesneListesi[4]);
+                if (user.nesneListesi[4].selected == true)
+                {
+                    userItem4.Enabled = false;
+                }
+                if (user.nesneListesi[4].selected == true && hamleSayisi < 5)
+                {
+                    userItem4.Enabled = false;
+                }
+                refreshLabels();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
         }
     }
 }
